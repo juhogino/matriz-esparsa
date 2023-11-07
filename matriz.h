@@ -3,7 +3,7 @@
 
 typedef struct Celula {
     struct Celula *direita, *abaixo;
-    int linha, coluna;
+    int linha, coluna, cabeca;
     float valor;
 } Celula;
 
