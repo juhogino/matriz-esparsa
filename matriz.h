@@ -2,8 +2,8 @@
 #define MATRIZ_H
 
 typedef struct Celula {
-    struct Celula *direita, *abaixo;
-    int linha, coluna, cabeca;
+    struct Celula *direita, *abaixo, *cabeca;
+    int linha, coluna;
     float valor;
 } Celula;
 
