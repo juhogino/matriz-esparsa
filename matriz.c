@@ -8,7 +8,7 @@ void imprimeMatriz(Matriz A) {
     Celula *atual;
 
     for (i = 0; i < A.nlin; i++) {
-        atual = A.linhas[i].cabeca->direita; 
+        atual = A.linhas[i].cabeca -> direita; 
         for (j = 0; j < A.ncol; j++) {
             if (atual != A.linhas[i].cabeca && atual->coluna == j) {
                 printf("%.2f\t", atual->valor);
@@ -22,7 +22,7 @@ void imprimeMatriz(Matriz A) {
 }
 
 Matriz leMatriz(const char *matrizesesparsas) {
-    FILE *arquivo = fopen(matrizesesparsaso, "r");
+    FILE *arquivo = fopen(matrizesesparsas, "r");
     if (arquivo == NULL) {
         printf("Erro.\n");
         exit(EXIT_FAILURE);
@@ -65,8 +65,8 @@ Matriz somaMatrizes(Matriz A, Matriz B) {
     C.nlin = A.nlin;
     C.ncol = A.ncol;
     C.linhas = (Celula*)malloc(A.nlin * sizeof(Celula));
-
-    for (int i = 0; i < A.nlin; i++) {
+	int i;
+    for ( i = 0; i < A.nlin; i++) {
         C.linhas[i].cabeca = (Celula*)malloc(sizeof(Celula));
         C.linhas[i].cabeca->direita = C.linhas[i].cabeca;
         C.linhas[i].cabeca->abaixo = C.linhas[i].cabeca;
@@ -128,8 +128,8 @@ Matriz multiplicaMatrizes(Matriz A, Matriz B) {
     C.nlin = A.nlin;
     C.ncol = B.ncol;
     C.linhas = (Celula*)malloc(C.nlin * sizeof(Celula));
-
-    for (int i = 0; i < C.nlin; i++) {
+	int i;
+    for ( i = 0; i < C.nlin; i++) {
         C.linhas[i].cabeca = (Celula*)malloc(sizeof(Celula));
         C.linhas[i].cabeca->direita = C.linhas[i].cabeca;
         C.linhas[i].cabeca->abaixo = C.linhas[i].cabeca;
@@ -138,8 +138,9 @@ Matriz multiplicaMatrizes(Matriz A, Matriz B) {
         C.linhas[i].cabeca->valor = 0;
     }
 
-    for (int i = 0; i < A.nlin; i++) {
-        for (int k = 0; k < A.ncol; k++) {
+    for (i = 0; i < A.nlin; i++) {
+       int k;
+	    for ( k = 0; k < A.ncol; k++) {
             if (A.linhas[i].cabeca->direita != A.linhas[i].cabeca) {
                 Celula *atualA = A.linhas[i].cabeca->direita;
                 while (atualA != A.linhas[i].cabeca) {
@@ -173,6 +174,9 @@ void insere(Matriz *M, int i, int j, float v) {
     }
 
     Celula *novo = (Celula*)malloc(sizeof(Celula));
+    if (novo == NULL) {
+        printf("Erro de alocação de memória.\n");
+        exit(EXIT_FAILURE); }
     novo->linha = i;
     novo->coluna = j;
     novo->valor = v;
